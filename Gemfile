@@ -17,6 +17,7 @@ gem 'therubyracer', :platforms => :ruby
 gem 'uglifier'
 
 gem 'jquery-rails'
+gem 'bower-rails'
 
 group :development, :test do
   gem 'rspec-rails'
