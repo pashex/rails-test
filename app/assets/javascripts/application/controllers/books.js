@@ -1,6 +1,12 @@
 bookApp.controller('booksIndex', ['$scope', 'Book', 
   function($scope, Book) {
     $scope.books = Book.query();
+
+    $scope.destroy = function (index){
+      Book.remove({id: $scope.books[index].id}, function() {
+        $scope.books.splice(index, 1);
+      });
+    }
   }
 ]);
 
