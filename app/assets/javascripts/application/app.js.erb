@@ -3,9 +3,16 @@ var bookApp = angular.module('bookApp', ['ngRoute', 'ngResource']);
 bookApp.config(['$routeProvider', '$locationProvider',
   function($routeProvider, $locationProvider) {
     $routeProvider
-    .when('/', {
+    .when('/books', {
       templateUrl: '<%= asset_path("application/templates/index.html") %>',
-      controller: 'books'
+      controller: 'booksIndex'
+    })
+    .when('/books/:id', {
+      templateUrl: '<%= asset_path("application/templates/edit.html") %>',
+      controller: 'booksEdit'
+    })
+    .otherwise({
+      redirectTo: '/books'
     });
   }
 ]);
