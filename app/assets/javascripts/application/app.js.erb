@@ -1,0 +1,16 @@
+var bookApp = angular.module('bookApp', ['ngRoute']);
+
+bookApp.config(['$routeProvider', '$locationProvider',
+  function($routeProvider, $locationProvider) {
+    $routeProvider
+    .when('/', {
+      templateUrl: '<%= asset_path("application/templates/index.html") %>',
+      controller: 'books'
+    });
+  }
+]);
+
+bookApp.config(function($httpProvider) {
+  var authToken = $('meta[name="csrf-token"]').attr("content");
+  $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken;
+});
