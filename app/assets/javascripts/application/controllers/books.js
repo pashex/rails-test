@@ -18,3 +18,18 @@ bookApp.controller('booksEdit', ['$scope', '$location', '$routeParams', 'Book',
     }
   }
 ]);
+
+bookApp.controller('booksCreate', ['$scope', '$location', 'Book',
+  function($scope, $location, Book) {
+    $scope.book = new Book({name: ''});
+
+    $scope.save = function() {
+      $scope.book.$save(function() {
+        $location.path('/books');
+      },
+      function(response) {
+        $scope.errors = response.data;
+      });
+    }
+  }
+]);

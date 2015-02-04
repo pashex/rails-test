@@ -7,6 +7,10 @@ bookApp.config(['$routeProvider', '$locationProvider',
       templateUrl: '<%= asset_path("application/templates/index.html") %>',
       controller: 'booksIndex'
     })
+    .when('/books/new', {
+      templateUrl: '<%= asset_path("application/templates/edit.html") %>',
+      controller: 'booksCreate'
+    })
     .when('/books/:id', {
       templateUrl: '<%= asset_path("application/templates/edit.html") %>',
       controller: 'booksEdit'
