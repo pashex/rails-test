@@ -1,10 +1,14 @@
 class Api::BooksController < ApplicationController
-  before_action :load_book, only: [:update, :destroy]
+  before_action :load_book, only: [:show, :update, :destroy]
 
   def index
     render json: Book.all, status: :ok
   end
   
+  def show
+    render json: book, status: :ok
+  end
+
   def create
     @book = Book.new
     update_book

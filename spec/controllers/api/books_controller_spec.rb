@@ -56,6 +56,30 @@ RSpec.describe Api::BooksController, type: :controller do
     end
   end
 
+  describe '#show' do
+    let!(:book) { create :book }
+
+    context 'when book with specified id exist' do
+      it 'should return book data in json' do
+        get :show, format: :json, id: book.id
+        
+        expect(response).to be_success
+        expect(response.content_type).to eq Mime::JSON
+        expect(json_response['name']).to eq book.name
+        expect(json_response['description']).to eq book.description
+        expect(json_response['release_date'].to_date).to eq book.release_date
+      end
+    end
+  
+    context 'when book with specified id is not found' do
+      it 'should return 404 in response' do
+        get :show, format: :json, id: 0
+
+        expect(response.status).to eq 404
+      end
+    end
+  end
+
   describe '#update' do
     let!(:book) { create :book }
 
