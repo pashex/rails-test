@@ -1,3 +1,4 @@
+ruby '2.1.2'
 source 'https://rubygems.org'
 
 gem 'rails', '4.1.5'
@@ -6,6 +7,7 @@ gem 'rails', '4.1.5'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'puma'
 
 # Assets gems
 gem 'sass-rails'
@@ -25,6 +27,9 @@ group :development, :test do
 end
 
 gem 'shoulda-matchers', group: :test
+
+gem 'foreman'
+gem 'rails_12factor', group: :production
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
