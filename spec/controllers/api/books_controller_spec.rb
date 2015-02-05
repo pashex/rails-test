@@ -41,9 +41,13 @@ RSpec.describe Api::BooksController, type: :controller do
       let(:invalid_name_book_create) do
         post :create, format: :json, book: { name: '', description: 'book_description', release_date: '2015-01-01' }
       end
+      let(:invalid_release_date_book_create) do
+        post :create, format: :json, book: { name: 'book_name', release_date: '2015-21-01' }
+      end
 
       it 'should not create new book' do
         expect { invalid_name_book_create }.to change { Book.count }.by(0)
+        expect { invalid_release_date_book_create }.to change { Book.count }.by(0)
       end
 
       it 'should return name errors in json' do
@@ -52,6 +56,14 @@ RSpec.describe Api::BooksController, type: :controller do
         expect(response.status).to eq 422
         expect(response.content_type).to eq Mime::JSON
         expect(json_response).to eq Hash['name', ["can't be blank"]]
+      end
+
+      it 'should return release date errors in json' do
+        invalid_release_date_book_create
+
+        expect(response.status).to eq 422
+        expect(response.content_type).to eq Mime::JSON
+        expect(json_response).to eq Hash['release_date', [I18n.t('activerecord.errors.models.book.attributes.release_date.blank')]]
       end
     end
   end
@@ -116,6 +128,14 @@ RSpec.describe Api::BooksController, type: :controller do
         expect(response.status).to eq 422
         expect(response.content_type).to eq Mime::JSON
         expect(json_response).to eq Hash['name', ["can't be blank"]]
+      end
+
+      it 'should return release date errors in json' do
+        patch :update, format: :json, id: book.id, book: { name: 'New name', release_date: '2010-99-99' }
+
+        expect(response.status).to eq 422
+        expect(response.content_type).to eq Mime::JSON
+        expect(json_response).to eq Hash['release_date', [I18n.t('activerecord.errors.models.book.attributes.release_date.blank')]]
       end
     end
 
