@@ -2,7 +2,7 @@ class Api::BooksController < ApplicationController
   before_action :load_book, only: [:show, :update, :destroy]
 
   def index
-    render json: Book.all, status: :ok
+    render json: Book.order(:release_date), status: :ok
   end
   
   def show
