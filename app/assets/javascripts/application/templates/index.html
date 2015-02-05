@@ -1,14 +1,22 @@
-<div>
-    <ul>
-        <li ng-repeat="book in books">
-            <div>{{book.release_date}}</div>
-            <div>{{book.name}}</div>
-            <div>{{book.description}}</div>
-            <div>
-                <a href="/#/books/{{book.id}}">Edit</a>
-                <a ng-click="destroy($index)" href="">Delete</a>
-            </div>
-        </li>
-    </ul>
-    <div><a href="/#/books/new">New Book</a></div>
-</div>
+<h1>List of Books</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Release Date:</th>
+      <th>Book Name:</th>
+      <th>Book Description:</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="book in books">
+      <td>{{book.release_date}}</td>
+      <td>{{book.name}}</td>
+      <td>{{book.description}}</td>
+      <td><a href="/#/books/{{book.id}}">Edit</a></td>
+      <td><a ng-click="destroy($index)" href="">Delete</a></td>
+    </tr>
+  </tbody>
+</table>  
+<div><a class="btn btn-default" href="/#/books/new">New Book</a></div>
