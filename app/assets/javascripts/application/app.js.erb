@@ -15,9 +15,14 @@ bookApp.config(['$routeProvider', '$locationProvider',
       templateUrl: '<%= asset_path("application/templates/edit.html") %>',
       controller: 'booksEdit'
     })
+    .when('/404', {
+      templateUrl: '<%= asset_path("application/templates/404.html") %>'
+    })
     .otherwise({
       redirectTo: '/books'
     });
+
+    $locationProvider.html5Mode(true);
   }
 ]);
 

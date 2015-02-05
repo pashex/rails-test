@@ -6,5 +6,7 @@ RailsTest::Application.routes.draw do
   
   namespace :ng, path: '/' do
     root to: 'home#index', as: :home
+    get '/*path', to: 'home#index'
   end 
+  
 end

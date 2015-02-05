@@ -14,9 +14,9 @@
       <td>{{book.release_date}}</td>
       <td>{{book.name}}</td>
       <td>{{book.description}}</td>
-      <td><a href="/#/books/{{book.id}}">Edit</a></td>
+      <td><a href="/books/{{book.id}}">Edit</a></td>
       <td><a ng-click="destroy($index)" href="">Delete</a></td>
     </tr>
   </tbody>
 </table>  
-<div><a class="btn btn-default" href="/#/books/new">New Book</a></div>
+<div><a class="btn btn-default" href="/books/new">New Book</a></div>

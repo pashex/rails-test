@@ -1,10 +1,14 @@
-bookApp.controller('booksIndex', ['$scope', 'Book', 
-  function($scope, Book) {
+bookApp.controller('booksIndex', ['$scope', '$location', 'Book', 
+  function($scope, $location, Book) {
     $scope.books = Book.query();
 
     $scope.destroy = function (index){
       Book.remove({id: $scope.books[index].id}, function() {
         $scope.books.splice(index, 1);
+      }, function(response) {
+        if (response.status == 404) {
+          $location.path('/404');
+        };
       });
     }
   }
@@ -12,7 +16,11 @@ bookApp.controller('booksIndex', ['$scope', 'Book',
 
 bookApp.controller('booksEdit', ['$scope', '$location', '$routeParams', 'Book',
   function($scope, $location, $routeParams, Book) { 
-    $scope.book = Book.get({id: $routeParams.id});
+    $scope.book = Book.get({id: $routeParams.id}, function() {}, function(response) {
+      if (response.status == 404) {
+        $location.path('/404');
+      };
+    });
 
     $scope.save = function() {
       $scope.book.$update(function() {
